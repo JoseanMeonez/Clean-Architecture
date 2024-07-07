@@ -63,7 +63,6 @@ public static class DependencyInjection
 			});
 		});
 
-		//services.AddTransient<GlobalExceptionHandlingMiddleware>();
 		services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 		return services;
