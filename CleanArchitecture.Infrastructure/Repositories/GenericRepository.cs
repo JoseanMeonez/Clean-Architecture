@@ -47,7 +47,9 @@ public class GenericRepository<T, TId> : IGenericRepository<T, TId>
 		IQueryable<T> query = _entity;
 
 		if (filter != null)
+		{
 			query = query.Where(filter);
+		}
 
 		return query;
 	}
@@ -86,7 +88,9 @@ public class GenericRepository<T, TId> : IGenericRepository<T, TId>
 		T? entity = await GetByIdAsync(id);
 
 		if (entity == null)
+		{
 			return false;
+		}
 
 		_entity.Remove(entity);
 

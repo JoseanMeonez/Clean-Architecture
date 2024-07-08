@@ -8,16 +8,11 @@ using System.Text;
 
 namespace Application.Services.Jwt;
 
-public class JwtService : IJwtService
+public class JwtService(IHttpContextAccessor httpContextAccessor, IOptions<JWTSettings> jwtSettings)
+	: IJwtService
 {
-	private readonly IHttpContextAccessor _httpContextAccessor;
-	private readonly JWTSettings _jwtSettings;
-
-	public JwtService(IHttpContextAccessor httpContextAccessor, IOptions<JWTSettings> jwtSettings)
-	{
-		_httpContextAccessor = httpContextAccessor;
-		_jwtSettings = jwtSettings.Value;
-	}
+	private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+	private readonly JWTSettings _jwtSettings = jwtSettings.Value;
 
 	public string GetSubjectToken()
 	{
@@ -34,12 +29,13 @@ public class JwtService : IJwtService
 
 		var tokenHandler = new JwtSecurityTokenHandler();
 		var key = Encoding.UTF8.GetBytes(_jwtSettings.Key);
-		var validationParameters = new TokenValidationParameters();
-
-		validationParameters.ValidateLifetime = true;
-		validationParameters.ValidAudience = _jwtSettings.Audience;
-		validationParameters.ValidIssuer = _jwtSettings.Issuer;
-		validationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
+		var validationParameters = new TokenValidationParameters
+		{
+			ValidateLifetime = true,
+			ValidAudience = _jwtSettings.Audience,
+			ValidIssuer = _jwtSettings.Issuer,
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key))
+		};
 
 		tokenHandler.ValidateToken(token, new TokenValidationParameters
 		{
@@ -72,12 +68,13 @@ public class JwtService : IJwtService
 
 		var tokenHandler = new JwtSecurityTokenHandler();
 		var key = Encoding.UTF8.GetBytes(_jwtSettings.Key);
-		var validationParameters = new TokenValidationParameters();
-
-		validationParameters.ValidateLifetime = true;
-		validationParameters.ValidAudience = _jwtSettings.Audience;
-		validationParameters.ValidIssuer = _jwtSettings.Issuer;
-		validationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
+		var validationParameters = new TokenValidationParameters
+		{
+			ValidateLifetime = true,
+			ValidAudience = _jwtSettings.Audience,
+			ValidIssuer = _jwtSettings.Issuer,
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key))
+		};
 
 		tokenHandler.ValidateToken(token, new TokenValidationParameters
 		{

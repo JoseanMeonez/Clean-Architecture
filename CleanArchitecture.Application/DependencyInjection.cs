@@ -32,7 +32,6 @@ public static class DependencyInjection
 		return services;
 	}
 
-
 	/// <summary>
 	///		This inject the main application depencies
 	/// </summary>
