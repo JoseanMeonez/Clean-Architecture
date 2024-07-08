@@ -6,7 +6,7 @@ public partial class Email : BaseEntity<int>
 
 	public required string EmailName { get; set; }
 
-	public int CustomerId { get; set; }
+	public required int CustomerId { get; set; }
 
 	public virtual Customer? Customer { get; set; }
 }

@@ -8,7 +8,7 @@ public partial class User : BaseEntity<Guid>
 
 	public required string UserName { get; set; }
 
-	public int GenderId { get; set; }
+	public required int GenderId { get; set; }
 
 	public required byte[] PasswordHash { get; set; }
 
@@ -18,7 +18,7 @@ public partial class User : BaseEntity<Guid>
 
 	public required byte[] MasterPasswordSalt { get; set; }
 
-	public bool IsActive { get; set; }
+	public required bool IsActive { get; set; }
 
 	public virtual Gender? Gender { get; set; }
 }

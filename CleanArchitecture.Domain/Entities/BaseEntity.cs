@@ -6,7 +6,7 @@ public abstract class BaseEntity<TId>
 
 	public required string CreatedBy { get; init; }
 
-	public DateTime CreationDate { get; init; }
+	public required DateTime CreationDate { get; init; }
 
 	public string? UpdatedBy { get; set; }
 

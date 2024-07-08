@@ -10,15 +10,15 @@ public partial class Customer : BaseEntity<int>
 
 	public required string Address { get; set; }
 
-	public int GenderId { get; set; }
+	public required int GenderId { get; set; }
 
-	public int NationalityId { get; set; }
+	public required int NationalityId { get; set; }
 
-	public int IdentificationTypeId { get; set; }
+	public required int IdentificationTypeId { get; set; }
 
 	public required string IdentificationValue { get; set; }
 
-	public int NeighborhoodId { get; set; }
+	public required int NeighborhoodId { get; set; }
 
 	public int? ProspectId { get; set; }
 

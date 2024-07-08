@@ -6,7 +6,7 @@ public partial class PhoneNumber : BaseEntity<int>
 
 	public required string Number { get; set; }
 
-	public int CustomerId { get; set; }
+	public required int CustomerId { get; set; }
 
 	public virtual Customer? Customer { get; set; }
 }
