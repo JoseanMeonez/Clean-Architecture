@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Contexts.Configurations;
-internal class EmailConfiguration : IEntityTypeConfiguration<Email>
+
+internal sealed class EmailConfiguration : IEntityTypeConfiguration<Email>
 {
 	public void Configure(EntityTypeBuilder<Email> entity)
 	{
-		entity.ToTable("Email");
+		entity.ToTable(nameof(Email));
 
 		entity.HasKey(e => e.Id);
 

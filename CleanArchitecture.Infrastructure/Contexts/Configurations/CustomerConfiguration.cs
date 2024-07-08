@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Contexts.Configurations;
 
-internal class CustomerConfiguration : IEntityTypeConfiguration<Customer>
+internal sealed class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
 	public void Configure(EntityTypeBuilder<Customer> entity)
 	{
-		entity.ToTable("Customer");
+		entity.ToTable(nameof(Customer));
 
 		entity.HasKey(e => e.Id);
 

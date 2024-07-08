@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Contexts.Configurations;
-internal class IdentificationTypeConfiguration : IEntityTypeConfiguration<IdentificationType>
+
+internal sealed class IdentificationTypeConfiguration : IEntityTypeConfiguration<IdentificationType>
 {
 	public void Configure(EntityTypeBuilder<IdentificationType> entity)
 	{
-		entity.ToTable("IdentificationType");
+		entity.ToTable(nameof(IdentificationType));
 
 		entity.Property(e => e.Name)
 			.HasMaxLength(50)

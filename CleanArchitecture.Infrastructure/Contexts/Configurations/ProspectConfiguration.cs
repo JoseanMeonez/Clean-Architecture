@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Contexts.Configurations;
-internal class ProspectConfiguration : IEntityTypeConfiguration<Prospect>
+
+internal sealed class ProspectConfiguration : IEntityTypeConfiguration<Prospect>
 {
 	public void Configure(EntityTypeBuilder<Prospect> entity)
 	{
-		entity.ToTable("Prospect");
+		entity.ToTable(nameof(Prospect));
 
 		entity.HasKey(p => p.Id);
 

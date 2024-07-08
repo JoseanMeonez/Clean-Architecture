@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Contexts.Configurations;
-internal class PhoneNumberConfiguration : IEntityTypeConfiguration<PhoneNumber>
+
+internal sealed class PhoneNumberConfiguration : IEntityTypeConfiguration<PhoneNumber>
 {
 	public void Configure(EntityTypeBuilder<PhoneNumber> entity)
 	{
-		entity.ToTable("PhoneNumber");
+		entity.ToTable(nameof(PhoneNumber));
 
 		entity.HasKey(e => e.Id);
 
