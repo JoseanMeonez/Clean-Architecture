@@ -22,15 +22,15 @@ public partial class Customer : BaseEntity<int>
 
 	public int? ProspectId { get; set; }
 
-	public virtual ICollection<Email> Emails { get; set; } = new List<Email>();
+	public virtual ICollection<Email> Emails { get; set; } = [];
 
 	public virtual Gender? Gender { get; set; }
 
 	public virtual IdentificationType? IdentificationType { get; set; }
 
-	public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; } = new List<PhoneNumber>();
+	public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; } = [];
 
 	public virtual Prospect? Prospect { get; set; }
 
-	public virtual ICollection<Reference> References { get; set; } = new List<Reference>();
+	public virtual ICollection<Reference> References { get; set; } = [];
 }

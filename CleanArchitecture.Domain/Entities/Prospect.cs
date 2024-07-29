@@ -28,5 +28,5 @@ public partial class Prospect : BaseEntity<int>
 
 	public required int NeighborhoodId { get; set; }
 
-	public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
+	public virtual ICollection<Customer> Customers { get; set; } = [];
 }

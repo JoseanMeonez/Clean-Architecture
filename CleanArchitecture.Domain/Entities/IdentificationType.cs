@@ -4,5 +4,5 @@ public partial class IdentificationType : BaseEntity<int>
 {
 	public required string Name { get; set; }
 
-	public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
+	public virtual ICollection<Customer> Customers { get; set; } = [];
 }
