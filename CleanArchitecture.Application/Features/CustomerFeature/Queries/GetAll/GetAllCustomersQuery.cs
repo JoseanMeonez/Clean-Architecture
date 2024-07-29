@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Application.Features.CustomerFeature.Queries.GetAll;
 
-public record GetAllCustomersQuery() : IRequest<Response<BasicCustomerResponse>>;
+public sealed record GetAllCustomersQuery() : IRequest<Response<BasicCustomerResponse>>;
 
-internal class GetAllCustomersQueryHandler : IRequestHandler<
+internal sealed class GetAllCustomersQueryHandler : IRequestHandler<
 	GetAllCustomersQuery,
 	Response<BasicCustomerResponse>>
 {

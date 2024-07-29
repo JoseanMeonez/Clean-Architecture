@@ -6,14 +6,14 @@ public class ValidationException : Exception
 {
 	public ValidationException() : base("Se han producido uno o más errores de validación")
 	{
-		Errors = new List<string>();
+		Errors = [];
 	}
 
 	public List<string> Errors { get; }
 
 	public ValidationException(IEnumerable<ValidationFailure> failures) : this()
 	{
-		foreach (var failure in failures)
+		foreach (ValidationFailure failure in failures)
 		{
 			Errors.Add(failure.ErrorMessage);
 		}

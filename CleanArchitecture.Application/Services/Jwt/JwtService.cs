@@ -8,33 +8,30 @@ using System.Text;
 
 namespace Application.Services.Jwt;
 
-public class JwtService(IHttpContextAccessor httpContextAccessor, IOptions<JWTSettings> jwtSettings)
-	: IJwtService
+public class JwtService(IHttpContextAccessor httpContextAccessor, IOptions<JWTSettings> jwtSettings) : IJwtService
 {
-	private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
-	private readonly JWTSettings _jwtSettings = jwtSettings.Value;
-
 	public string GetSubjectToken()
 	{
 		string token;
-		if (_httpContextAccessor.HttpContext is null)
+
+		if (httpContextAccessor.HttpContext is null)
 		{
 			throw new ApiException("Ocurrio un problema en los encabezados de esta solicitud.");
 		}
 		else
 		{
-			string username = _httpContextAccessor.HttpContext.Request.Headers["Authorization"]!;
+			string username = httpContextAccessor.HttpContext.Request.Headers.Authorization!;
 			token = username.Split(" ")[1];
 		}
 
 		var tokenHandler = new JwtSecurityTokenHandler();
-		var key = Encoding.UTF8.GetBytes(_jwtSettings.Key);
+		var key = Encoding.UTF8.GetBytes(jwtSettings.Value.Key);
 		var validationParameters = new TokenValidationParameters
 		{
 			ValidateLifetime = true,
-			ValidAudience = _jwtSettings.Audience,
-			ValidIssuer = _jwtSettings.Issuer,
-			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key))
+			ValidAudience = jwtSettings.Value.Audience,
+			ValidIssuer = jwtSettings.Value.Issuer,
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Value.Key))
 		};
 
 		tokenHandler.ValidateToken(token, new TokenValidationParameters
@@ -56,24 +53,24 @@ public class JwtService(IHttpContextAccessor httpContextAccessor, IOptions<JWTSe
 	{
 		string token;
 
-		if (_httpContextAccessor.HttpContext == null)
+		if (httpContextAccessor.HttpContext == null)
 		{
 			throw new ApiException("Ocurrio un problema en los encabezados de esta solicitud.");
 		}
 		else
 		{
-			string username = _httpContextAccessor.HttpContext.Request.Headers["Authorization"]!;
+			string username = httpContextAccessor.HttpContext.Request.Headers.Authorization!;
 			token = username.Split(" ")[1];
 		}
 
 		var tokenHandler = new JwtSecurityTokenHandler();
-		var key = Encoding.UTF8.GetBytes(_jwtSettings.Key);
+		var key = Encoding.UTF8.GetBytes(jwtSettings.Value.Key);
 		var validationParameters = new TokenValidationParameters
 		{
 			ValidateLifetime = true,
-			ValidAudience = _jwtSettings.Audience,
-			ValidIssuer = _jwtSettings.Issuer,
-			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key))
+			ValidAudience = jwtSettings.Value.Audience,
+			ValidIssuer = jwtSettings.Value.Issuer,
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Value.Key))
 		};
 
 		tokenHandler.ValidateToken(token, new TokenValidationParameters

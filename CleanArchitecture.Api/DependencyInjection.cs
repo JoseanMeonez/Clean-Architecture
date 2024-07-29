@@ -59,7 +59,7 @@ public static class DependencyInjection
 			opt.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
 			opt.AddSecurityRequirement(new OpenApiSecurityRequirement
 			{
-					{ securityScheme, new string[]{} }
+					{ securityScheme, Array.Empty<string>() }
 			});
 		});
 
