@@ -24,9 +24,10 @@ public class JwtService(IHttpContextAccessor httpContextAccessor, IOptions<JWTSe
 			token = username.Split(" ")[1];
 		}
 
-		var tokenHandler = new JwtSecurityTokenHandler();
-		var key = Encoding.UTF8.GetBytes(jwtSettings.Value.Key);
-		var validationParameters = new TokenValidationParameters
+		JwtSecurityTokenHandler tokenHandler = new();
+		byte[] key = Encoding.UTF8.GetBytes(jwtSettings.Value.Key);
+
+		TokenValidationParameters validationParameters = new()
 		{
 			ValidateLifetime = true,
 			ValidAudience = jwtSettings.Value.Audience,
@@ -43,8 +44,8 @@ public class JwtService(IHttpContextAccessor httpContextAccessor, IOptions<JWTSe
 			ClockSkew = TimeSpan.Zero
 		}, out SecurityToken validatedToken);
 
-		var jwtToken = (JwtSecurityToken)validatedToken;
-		var name = jwtToken.Claims.First(x => x.Type == "sub").Value;
+		JwtSecurityToken jwtToken = (JwtSecurityToken)validatedToken;
+		string name = jwtToken.Claims.First(x => x.Type == "sub").Value;
 
 		return name;
 	}
@@ -63,9 +64,10 @@ public class JwtService(IHttpContextAccessor httpContextAccessor, IOptions<JWTSe
 			token = username.Split(" ")[1];
 		}
 
-		var tokenHandler = new JwtSecurityTokenHandler();
-		var key = Encoding.UTF8.GetBytes(jwtSettings.Value.Key);
-		var validationParameters = new TokenValidationParameters
+		JwtSecurityTokenHandler tokenHandler = new();
+		byte[] key = Encoding.UTF8.GetBytes(jwtSettings.Value.Key);
+
+		TokenValidationParameters validationParameters = new()
 		{
 			ValidateLifetime = true,
 			ValidAudience = jwtSettings.Value.Audience,
@@ -82,8 +84,8 @@ public class JwtService(IHttpContextAccessor httpContextAccessor, IOptions<JWTSe
 			ClockSkew = TimeSpan.Zero
 		}, out SecurityToken validatedToken);
 
-		var jwtToken = (JwtSecurityToken)validatedToken;
-		var guid = Guid.Parse(jwtToken.Claims.First(x => x.Type == "uid").Value);
+		JwtSecurityToken jwtToken = (JwtSecurityToken)validatedToken;
+		Guid guid = Guid.Parse(jwtToken.Claims.First(x => x.Type == "uid").Value);
 
 		return guid;
 	}

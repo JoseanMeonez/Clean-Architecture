@@ -15,9 +15,9 @@ public class ErrorHandlerMiddleware(RequestDelegate next)
 		}
 		catch (Exception error)
 		{
-			var response = context.Response;
+			HttpResponse response = context.Response;
 			response.ContentType = "application/json";
-			var responseModel = new Response<string>()
+			Response<string> responseModel = new()
 			{
 				Succeeded = false,
 				Message = error.Message,
@@ -64,7 +64,7 @@ public class ErrorHandlerMiddleware(RequestDelegate next)
 					break;
 			}
 
-			var result = JsonSerializer.Serialize(responseModel);
+			string result = JsonSerializer.Serialize(responseModel);
 
 			await response.WriteAsync(result);
 		}
