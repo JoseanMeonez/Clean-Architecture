@@ -10,8 +10,8 @@ namespace Application.Features.CustomerFeature.Queries.GetById;
 public sealed record GetCustomerByIdQuery(int Id) : IRequest<Response<BasicCustomerResponse>>;
 
 internal sealed class GetCustomerByIdHandler(
-		ICustomerRepository customerRepository,
-		IMapper mapper)
+	ICustomerRepository customerRepository,
+	IMapper mapper)
 	: IRequestHandler<GetCustomerByIdQuery, Response<BasicCustomerResponse>>
 {
 	public async Task<Response<BasicCustomerResponse>> Handle(
