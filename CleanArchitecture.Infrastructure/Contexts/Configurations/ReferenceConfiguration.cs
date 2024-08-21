@@ -24,7 +24,6 @@ internal sealed class ReferenceConfiguration : IEntityTypeConfiguration<Referenc
 
 		entity.HasOne(d => d.Customer).WithMany(p => p.References)
 			.HasForeignKey(d => d.CustomerId)
-			.OnDelete(DeleteBehavior.ClientSetNull)
-			.HasConstraintName("FK_Reference_Customer");
+			.OnDelete(DeleteBehavior.ClientSetNull);
 	}
 }

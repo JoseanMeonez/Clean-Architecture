@@ -35,15 +35,13 @@ internal sealed class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 		entity.HasOne(d => d.Gender).WithMany(p => p.Customers)
 			.HasForeignKey(d => d.GenderId)
 			.OnDelete(DeleteBehavior.ClientSetNull)
-			.HasConstraintName("FK_Customer_Gender");
+			.HasConstraintName($"FK_{nameof(Customer)}_{nameof(Gender)}");
 
 		entity.HasOne(d => d.IdentificationType).WithMany(p => p.Customers)
 			.HasForeignKey(d => d.IdentificationTypeId)
-			.OnDelete(DeleteBehavior.ClientSetNull)
-			.HasConstraintName("FK_Customer_IdentificationType");
+			.OnDelete(DeleteBehavior.ClientSetNull);
 
 		entity.HasOne(d => d.Prospect).WithMany(p => p.Customers)
-			.HasForeignKey(d => d.ProspectId)
-			.HasConstraintName("FK_Customer_Prospect");
+			.HasForeignKey(d => d.ProspectId);
 	}
 }

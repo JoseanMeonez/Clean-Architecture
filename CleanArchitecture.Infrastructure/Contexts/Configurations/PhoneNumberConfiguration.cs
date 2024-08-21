@@ -18,12 +18,10 @@ internal sealed class PhoneNumberConfiguration : IEntityTypeConfiguration<PhoneN
 
 		entity.Property(e => e.Number)
 			.HasMaxLength(8)
-			.IsUnicode(false)
-			.HasColumnName("Number");
+			.IsUnicode(false);
 
 		entity.HasOne(d => d.Customer).WithMany(p => p.PhoneNumbers)
 			.HasForeignKey(d => d.CustomerId)
-			.OnDelete(DeleteBehavior.ClientSetNull)
-			.HasConstraintName("FK_PhoneNumber_Customer");
+			.OnDelete(DeleteBehavior.ClientSetNull);
 	}
 }

@@ -18,12 +18,11 @@ internal sealed class EmailConfiguration : IEntityTypeConfiguration<Email>
 
 		entity.Property(e => e.EmailName)
 			.HasMaxLength(100)
-			.IsUnicode(false)
-			.HasColumnName("EmailName");
+			.IsUnicode(false);
 
 		entity.HasOne(d => d.Customer).WithMany(p => p.Emails)
 			.HasForeignKey(d => d.CustomerId)
 			.OnDelete(DeleteBehavior.ClientSetNull)
-			.HasConstraintName("FK_Email_Customer");
+			.HasConstraintName($"FK_{nameof(Email)}_{nameof(Customer)}");
 	}
 }
