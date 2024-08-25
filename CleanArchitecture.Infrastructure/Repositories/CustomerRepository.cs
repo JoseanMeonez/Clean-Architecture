@@ -5,15 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class CustomerRepository : GenericRepository<Customer, int>, ICustomerRepository
+public class CustomerRepository(MainContext context) : GenericRepository<Customer, int>(context), ICustomerRepository
 {
-	private readonly MainContext _context;
-
-	public CustomerRepository(MainContext context) : base(context)
-	{
-		_context = context;
-	}
-
 	public Task<Customer?> GetByIdWithIncludes(int customerId)
 	{
 		return GetEntityQuery()

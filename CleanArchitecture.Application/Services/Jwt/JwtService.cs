@@ -8,38 +8,32 @@ using System.Text;
 
 namespace Application.Services.Jwt;
 
-public class JwtService : IJwtService
+public class JwtService(IHttpContextAccessor httpContextAccessor, IOptions<JWTSettings> jwtSettings) : IJwtService
 {
-	private readonly IHttpContextAccessor _httpContextAccessor;
-	private readonly JWTSettings _jwtSettings;
-
-	public JwtService(IHttpContextAccessor httpContextAccessor, IOptions<JWTSettings> jwtSettings)
-	{
-		_httpContextAccessor = httpContextAccessor;
-		_jwtSettings = jwtSettings.Value;
-	}
-
 	public string GetSubjectToken()
 	{
 		string token;
-		if (_httpContextAccessor.HttpContext is null)
+
+		if (httpContextAccessor.HttpContext is null)
 		{
 			throw new ApiException("Ocurrio un problema en los encabezados de esta solicitud.");
 		}
 		else
 		{
-			string username = _httpContextAccessor.HttpContext.Request.Headers["Authorization"]!;
+			string username = httpContextAccessor.HttpContext.Request.Headers.Authorization!;
 			token = username.Split(" ")[1];
 		}
 
-		var tokenHandler = new JwtSecurityTokenHandler();
-		var key = Encoding.UTF8.GetBytes(_jwtSettings.Key);
-		var validationParameters = new TokenValidationParameters();
+		JwtSecurityTokenHandler tokenHandler = new();
+		byte[] key = Encoding.UTF8.GetBytes(jwtSettings.Value.Key);
 
-		validationParameters.ValidateLifetime = true;
-		validationParameters.ValidAudience = _jwtSettings.Audience;
-		validationParameters.ValidIssuer = _jwtSettings.Issuer;
-		validationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
+		TokenValidationParameters validationParameters = new()
+		{
+			ValidateLifetime = true,
+			ValidAudience = jwtSettings.Value.Audience,
+			ValidIssuer = jwtSettings.Value.Issuer,
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Value.Key))
+		};
 
 		tokenHandler.ValidateToken(token, new TokenValidationParameters
 		{
@@ -50,8 +44,8 @@ public class JwtService : IJwtService
 			ClockSkew = TimeSpan.Zero
 		}, out SecurityToken validatedToken);
 
-		var jwtToken = (JwtSecurityToken)validatedToken;
-		var name = jwtToken.Claims.First(x => x.Type == "sub").Value;
+		JwtSecurityToken jwtToken = (JwtSecurityToken)validatedToken;
+		string name = jwtToken.Claims.First(x => x.Type == "sub").Value;
 
 		return name;
 	}
@@ -60,24 +54,26 @@ public class JwtService : IJwtService
 	{
 		string token;
 
-		if (_httpContextAccessor.HttpContext == null)
+		if (httpContextAccessor.HttpContext == null)
 		{
 			throw new ApiException("Ocurrio un problema en los encabezados de esta solicitud.");
 		}
 		else
 		{
-			string username = _httpContextAccessor.HttpContext.Request.Headers["Authorization"]!;
+			string username = httpContextAccessor.HttpContext.Request.Headers.Authorization!;
 			token = username.Split(" ")[1];
 		}
 
-		var tokenHandler = new JwtSecurityTokenHandler();
-		var key = Encoding.UTF8.GetBytes(_jwtSettings.Key);
-		var validationParameters = new TokenValidationParameters();
+		JwtSecurityTokenHandler tokenHandler = new();
+		byte[] key = Encoding.UTF8.GetBytes(jwtSettings.Value.Key);
 
-		validationParameters.ValidateLifetime = true;
-		validationParameters.ValidAudience = _jwtSettings.Audience;
-		validationParameters.ValidIssuer = _jwtSettings.Issuer;
-		validationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
+		TokenValidationParameters validationParameters = new()
+		{
+			ValidateLifetime = true,
+			ValidAudience = jwtSettings.Value.Audience,
+			ValidIssuer = jwtSettings.Value.Issuer,
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Value.Key))
+		};
 
 		tokenHandler.ValidateToken(token, new TokenValidationParameters
 		{
@@ -88,8 +84,8 @@ public class JwtService : IJwtService
 			ClockSkew = TimeSpan.Zero
 		}, out SecurityToken validatedToken);
 
-		var jwtToken = (JwtSecurityToken)validatedToken;
-		var guid = Guid.Parse(jwtToken.Claims.First(x => x.Type == "uid").Value);
+		JwtSecurityToken jwtToken = (JwtSecurityToken)validatedToken;
+		Guid guid = Guid.Parse(jwtToken.Claims.First(x => x.Type == "uid").Value);
 
 		return guid;
 	}

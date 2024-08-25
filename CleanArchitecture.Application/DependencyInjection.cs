@@ -27,11 +27,10 @@ public static class DependencyInjection
 	/// <returns></returns>
 	public static IServiceCollection AddRepositories(this IServiceCollection services)
 	{
-		services.AddTransient<ICustomerRepository, CustomerRepository>();
+		services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 		return services;
 	}
-
 
 	/// <summary>
 	///		This inject the main application depencies

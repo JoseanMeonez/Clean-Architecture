@@ -2,11 +2,11 @@
 
 public partial class PhoneNumber : BaseEntity<int>
 {
-	public string Description { get; set; } = null!;
+	public required string Description { get; set; }
 
-	public string Number { get; set; } = null!;
+	public required string Number { get; set; }
 
-	public int CustomerId { get; set; }
+	public required int CustomerId { get; set; }
 
-	public virtual Customer Customer { get; set; } = null!;
+	public virtual Customer? Customer { get; set; }
 }

@@ -4,16 +4,12 @@ using MediatR;
 
 namespace Application.Features.CustomerFeature.Queries.GetAll;
 
-public record GetAllCustomersQuery() : IRequest<Response<BasicCustomerResponse>>;
+public sealed record GetAllCustomersQuery() : IRequest<Response<BasicCustomerResponse>>;
 
-internal class GetAllCustomersQueryHandler : IRequestHandler<
+internal sealed class GetAllCustomersQueryHandler : IRequestHandler<
 	GetAllCustomersQuery,
 	Response<BasicCustomerResponse>>
 {
-	public async Task<Response<BasicCustomerResponse>> Handle(
-		GetAllCustomersQuery request,
-		CancellationToken cancellationToken)
-	{
-		throw new KeyNotFoundException($"No se encontraron registros.");
-	}
+	public Task<Response<BasicCustomerResponse>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
+		=> throw new KeyNotFoundException($"No se encontraron registros.");
 }

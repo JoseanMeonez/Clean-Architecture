@@ -2,7 +2,7 @@
 
 namespace Application.Features.CustomerFeature.Queries.GetAll;
 
-public class GetAllCustomersQueryValidator : AbstractValidator<GetAllCustomersQuery>
+public sealed class GetAllCustomersQueryValidator : AbstractValidator<GetAllCustomersQuery>
 {
 	public GetAllCustomersQueryValidator()
 	{

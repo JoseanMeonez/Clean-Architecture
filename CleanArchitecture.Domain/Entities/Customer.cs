@@ -2,35 +2,35 @@
 
 public partial class Customer : BaseEntity<int>
 {
-	public string Name { get; set; } = null!;
+	public required string Name { get; set; }
 
-	public string LastName { get; set; } = null!;
+	public required string LastName { get; set; }
 
 	public string? MarriedLastName { get; set; }
 
-	public string Address { get; set; } = null!;
+	public required string Address { get; set; }
 
-	public int GenderId { get; set; }
+	public required int GenderId { get; set; }
 
-	public int NationalityId { get; set; }
+	public required int NationalityId { get; set; }
 
-	public int IdentificationTypeId { get; set; }
+	public required int IdentificationTypeId { get; set; }
 
-	public string IdentificationValue { get; set; } = null!;
+	public required string IdentificationValue { get; set; }
 
-	public int NeighborhoodId { get; set; }
+	public required int NeighborhoodId { get; set; }
 
 	public int? ProspectId { get; set; }
 
-	public virtual ICollection<Email> Emails { get; set; } = new List<Email>();
+	public virtual ICollection<Email> Emails { get; set; } = [];
 
-	public virtual Gender Gender { get; set; } = null!;
+	public virtual Gender? Gender { get; set; }
 
-	public virtual IdentificationType IdentificationType { get; set; } = null!;
+	public virtual IdentificationType? IdentificationType { get; set; }
 
-	public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; } = new List<PhoneNumber>();
+	public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; } = [];
 
 	public virtual Prospect? Prospect { get; set; }
 
-	public virtual ICollection<Reference> References { get; set; } = new List<Reference>();
+	public virtual ICollection<Reference> References { get; set; } = [];
 }

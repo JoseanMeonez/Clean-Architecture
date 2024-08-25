@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Contexts.Configurations;
-internal class ReferenceConfiguration : IEntityTypeConfiguration<Reference>
+
+internal sealed class ReferenceConfiguration : IEntityTypeConfiguration<Reference>
 {
 	public void Configure(EntityTypeBuilder<Reference> entity)
 	{
-		entity.ToTable("Reference");
+		entity.ToTable(nameof(Reference));
 
 		entity.Property(e => e.Name)
 			.HasMaxLength(100)
@@ -23,7 +24,6 @@ internal class ReferenceConfiguration : IEntityTypeConfiguration<Reference>
 
 		entity.HasOne(d => d.Customer).WithMany(p => p.References)
 			.HasForeignKey(d => d.CustomerId)
-			.OnDelete(DeleteBehavior.ClientSetNull)
-			.HasConstraintName("FK_Reference_Customer");
+			.OnDelete(DeleteBehavior.ClientSetNull);
 	}
 }

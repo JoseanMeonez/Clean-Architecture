@@ -2,7 +2,7 @@
 
 public partial class Gender : BaseEntity<int>
 {
-	public string Name { get; set; } = null!;
+	public required string Name { get; set; }
 
-	public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
+	public virtual ICollection<Customer> Customers { get; set; } = [];
 }

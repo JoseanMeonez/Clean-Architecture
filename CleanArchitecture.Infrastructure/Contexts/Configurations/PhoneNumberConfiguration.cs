@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Contexts.Configurations;
-internal class PhoneNumberConfiguration : IEntityTypeConfiguration<PhoneNumber>
+
+internal sealed class PhoneNumberConfiguration : IEntityTypeConfiguration<PhoneNumber>
 {
 	public void Configure(EntityTypeBuilder<PhoneNumber> entity)
 	{
-		entity.ToTable("PhoneNumber");
+		entity.ToTable(nameof(PhoneNumber));
 
 		entity.HasKey(e => e.Id);
 
@@ -17,12 +18,10 @@ internal class PhoneNumberConfiguration : IEntityTypeConfiguration<PhoneNumber>
 
 		entity.Property(e => e.Number)
 			.HasMaxLength(8)
-			.IsUnicode(false)
-			.HasColumnName("Number");
+			.IsUnicode(false);
 
 		entity.HasOne(d => d.Customer).WithMany(p => p.PhoneNumbers)
 			.HasForeignKey(d => d.CustomerId)
-			.OnDelete(DeleteBehavior.ClientSetNull)
-			.HasConstraintName("FK_PhoneNumber_Customer");
+			.OnDelete(DeleteBehavior.ClientSetNull);
 	}
 }

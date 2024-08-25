@@ -1,10 +1,10 @@
 ﻿namespace Application.Settings;
 
-public class MailSettings
+public sealed class MailSettings
 {
-	public string Mail { get; set; } = null!;
-	public string DisplayName { get; set; } = null!;
-	public string Password { get; set; } = null!;
-	public string Host { get; set; } = null!;
-	public int Port { get; set; }
+	public required string Mail { get; set; }
+	public required string DisplayName { get; set; }
+	public required string Password { get; set; }
+	public required string Host { get; set; }
+	public required int Port { get; set; }
 }

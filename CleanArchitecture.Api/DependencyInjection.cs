@@ -24,7 +24,7 @@ public static class DependencyInjection
 		services.AddControllers();
 		services.AddEndpointsApiExplorer();
 
-		var openApi = new OpenApiInfo
+		OpenApiInfo openApi = new OpenApiInfo
 		{
 			Title = "PSI",
 			Version = "v1",
@@ -41,7 +41,7 @@ public static class DependencyInjection
 			openApi.Version = "v1";
 			opt.SwaggerDoc("v1", openApi);
 
-			var securityScheme = new OpenApiSecurityScheme
+			OpenApiSecurityScheme securityScheme = new OpenApiSecurityScheme
 			{
 				Name = "JWT Authentication",
 				Description = "JWT Bearer Token",
@@ -59,11 +59,10 @@ public static class DependencyInjection
 			opt.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
 			opt.AddSecurityRequirement(new OpenApiSecurityRequirement
 			{
-					{ securityScheme, new string[]{} }
+					{ securityScheme, Array.Empty<string>() }
 			});
 		});
 
-		//services.AddTransient<GlobalExceptionHandlingMiddleware>();
 		services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 		return services;

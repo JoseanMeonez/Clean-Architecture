@@ -2,13 +2,13 @@
 
 public partial class Reference : BaseEntity<int>
 {
-	public string Name { get; set; } = null!;
+	public required string Name { get; set; }
 
-	public string PhoneNumber { get; set; } = null!;
+	public required string PhoneNumber { get; set; }
 
-	public string Relationship { get; set; } = null!;
+	public required string Relationship { get; set; }
 
-	public int CustomerId { get; set; }
+	public required int CustomerId { get; set; }
 
-	public virtual Customer Customer { get; set; } = null!;
+	public virtual Customer? Customer { get; set; }
 }

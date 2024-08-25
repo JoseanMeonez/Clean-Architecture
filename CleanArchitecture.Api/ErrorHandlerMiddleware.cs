@@ -5,26 +5,19 @@ using System.Text.Json;
 
 namespace Api;
 
-public class ErrorHandlerMiddleware
+public class ErrorHandlerMiddleware(RequestDelegate next)
 {
-	private readonly RequestDelegate _next;
-
-	public ErrorHandlerMiddleware(RequestDelegate next)
-	{
-		_next = next;
-	}
-
 	public async Task Invoke(HttpContext context)
 	{
 		try
 		{
-			await _next(context);
+			await next(context);
 		}
 		catch (Exception error)
 		{
-			var response = context.Response;
+			HttpResponse response = context.Response;
 			response.ContentType = "application/json";
-			var responseModel = new Response<string>()
+			Response<string> responseModel = new()
 			{
 				Succeeded = false,
 				Message = error.Message,
@@ -71,7 +64,7 @@ public class ErrorHandlerMiddleware
 					break;
 			}
 
-			var result = JsonSerializer.Serialize(responseModel);
+			string result = JsonSerializer.Serialize(responseModel);
 
 			await response.WriteAsync(result);
 		}

@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Contexts.Configurations;
-internal class GenderConfiguration : IEntityTypeConfiguration<Gender>
+
+internal sealed class GenderConfiguration : IEntityTypeConfiguration<Gender>
 {
 	public void Configure(EntityTypeBuilder<Gender> entity)
 	{
-		entity.ToTable("Gender");
+		entity.ToTable(nameof(Gender));
 
 		entity.HasKey(e => e.Id);
 

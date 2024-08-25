@@ -2,31 +2,19 @@
 
 public partial class User : BaseEntity<Guid>
 {
-	public string Name { get; set; } = null!;
+	public required string Name { get; set; }
 
-	public string LastName { get; set; } = null!;
+	public required string LastName { get; set; }
 
-	public string UserName { get; set; } = null!;
+	public required string UserName { get; set; }
 
-	public int GenderId { get; set; }
+	public required int GenderId { get; set; }
 
-	public byte[] PasswordHash { get; set; } = null!;
+	public required byte[] PasswordHash { get; set; }
 
-	public byte[] PasswordSalt { get; set; } = null!;
+	public required byte[] PasswordSalt { get; set; }
 
-	public byte[] MasterPasswordHash { get; set; } = null!;
+	public required bool IsActive { get; set; }
 
-	public byte[] MasterPasswordSalt { get; set; } = null!;
-
-	public bool IsActive { get; set; }
-
-	public DateTime CreationDate { get; set; }
-
-	public string CreatedBy { get; set; } = null!;
-
-	public DateTime? ModificationDate { get; set; }
-
-	public string ModificatedBy { get; set; } = null!;
-
-	public virtual Gender Gender { get; set; } = null!;
+	public virtual Gender? Gender { get; set; }
 }
