@@ -6,24 +6,29 @@ namespace Infrastructure.Contexts.Configurations;
 
 internal sealed class ReferenceConfiguration : IEntityTypeConfiguration<Reference>
 {
-	public void Configure(EntityTypeBuilder<Reference> entity)
+	public void Configure(EntityTypeBuilder<Reference> builder)
 	{
-		entity.ToTable(nameof(Reference));
+		builder.HasKey(r => r.Id);
 
-		entity.Property(e => e.Name)
-			.HasMaxLength(100)
-			.IsUnicode(false);
+		builder.Property(r => r.Name)
+			.IsRequired()
+			.HasMaxLength(100);
 
-		entity.Property(e => e.PhoneNumber)
-			.HasMaxLength(8)
-			.IsUnicode(false);
+		builder.Property(r => r.PhoneNumber)
+			.IsRequired()
+			.HasMaxLength(15);
 
-		entity.Property(e => e.Relationship)
-			.HasMaxLength(100)
-			.IsUnicode(false);
+		builder.Property(r => r.Relationship)
+			.IsRequired()
+			.HasMaxLength(50);
 
-		entity.HasOne(d => d.Customer).WithMany(p => p.References)
-			.HasForeignKey(d => d.CustomerId)
-			.OnDelete(DeleteBehavior.ClientSetNull);
+		builder.Property(r => r.CustomerId)
+			.IsRequired();
+
+		// Relationships
+		builder.HasOne(r => r.Customer)
+			.WithMany(c => c.References)
+			.HasForeignKey(r => r.CustomerId)
+			.OnDelete(DeleteBehavior.Cascade);
 	}
 }

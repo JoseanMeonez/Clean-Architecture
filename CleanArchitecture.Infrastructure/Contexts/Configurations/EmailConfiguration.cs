@@ -6,23 +6,25 @@ namespace Infrastructure.Contexts.Configurations;
 
 internal sealed class EmailConfiguration : IEntityTypeConfiguration<Email>
 {
-	public void Configure(EntityTypeBuilder<Email> entity)
+	public void Configure(EntityTypeBuilder<Email> builder)
 	{
-		entity.ToTable(nameof(Email));
+		builder.HasKey(e => e.Id);
 
-		entity.HasKey(e => e.Id);
+		builder.Property(e => e.Description)
+			.IsRequired()
+			.HasMaxLength(250);
 
-		entity.Property(e => e.Description)
-			.HasMaxLength(50)
-			.IsUnicode(false);
+		builder.Property(e => e.EmailName)
+			.IsRequired()
+			.HasMaxLength(150);
 
-		entity.Property(e => e.EmailName)
-			.HasMaxLength(100)
-			.IsUnicode(false);
+		builder.Property(e => e.CustomerId)
+			.IsRequired();
 
-		entity.HasOne(d => d.Customer).WithMany(p => p.Emails)
-			.HasForeignKey(d => d.CustomerId)
-			.OnDelete(DeleteBehavior.ClientSetNull)
-			.HasConstraintName($"FK_{nameof(Email)}_{nameof(Customer)}");
+		// Relationships
+		builder.HasOne(e => e.Customer)
+			.WithMany(c => c.Emails)
+			.HasForeignKey(e => e.CustomerId)
+			.OnDelete(DeleteBehavior.Cascade);
 	}
 }

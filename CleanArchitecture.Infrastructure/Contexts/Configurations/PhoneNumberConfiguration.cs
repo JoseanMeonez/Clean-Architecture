@@ -6,22 +6,25 @@ namespace Infrastructure.Contexts.Configurations;
 
 internal sealed class PhoneNumberConfiguration : IEntityTypeConfiguration<PhoneNumber>
 {
-	public void Configure(EntityTypeBuilder<PhoneNumber> entity)
+	public void Configure(EntityTypeBuilder<PhoneNumber> builder)
 	{
-		entity.ToTable(nameof(PhoneNumber));
+		builder.HasKey(pn => pn.Id);
 
-		entity.HasKey(e => e.Id);
+		builder.Property(pn => pn.Description)
+			.IsRequired()
+			.HasMaxLength(250);
 
-		entity.Property(e => e.Description)
-			.HasMaxLength(50)
-			.IsUnicode(false);
+		builder.Property(pn => pn.Number)
+			.IsRequired()
+			.HasMaxLength(15);
 
-		entity.Property(e => e.Number)
-			.HasMaxLength(8)
-			.IsUnicode(false);
+		builder.Property(pn => pn.CustomerId)
+			.IsRequired();
 
-		entity.HasOne(d => d.Customer).WithMany(p => p.PhoneNumbers)
-			.HasForeignKey(d => d.CustomerId)
-			.OnDelete(DeleteBehavior.ClientSetNull);
+		// Relationships
+		builder.HasOne(pn => pn.Customer)
+			.WithMany(c => c.PhoneNumbers)
+			.HasForeignKey(pn => pn.CustomerId)
+			.OnDelete(DeleteBehavior.Cascade);
 	}
 }

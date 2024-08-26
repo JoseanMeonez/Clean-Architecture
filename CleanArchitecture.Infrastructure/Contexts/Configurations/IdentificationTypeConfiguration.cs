@@ -6,12 +6,18 @@ namespace Infrastructure.Contexts.Configurations;
 
 internal sealed class IdentificationTypeConfiguration : IEntityTypeConfiguration<IdentificationType>
 {
-	public void Configure(EntityTypeBuilder<IdentificationType> entity)
+	public void Configure(EntityTypeBuilder<IdentificationType> builder)
 	{
-		entity.ToTable(nameof(IdentificationType));
+		builder.HasKey(it => it.Id);
 
-		entity.Property(e => e.Name)
-			.HasMaxLength(50)
-			.IsUnicode(false);
+		builder.Property(it => it.Name)
+			.IsRequired()
+			.HasMaxLength(50);
+
+		// Relationships
+		builder.HasMany(it => it.Customers)
+			.WithOne(c => c.IdentificationType)
+			.HasForeignKey(c => c.IdentificationTypeId)
+			.OnDelete(DeleteBehavior.Restrict);
 	}
 }

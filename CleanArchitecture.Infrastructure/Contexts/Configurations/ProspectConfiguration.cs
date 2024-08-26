@@ -6,46 +6,76 @@ namespace Infrastructure.Contexts.Configurations;
 
 internal sealed class ProspectConfiguration : IEntityTypeConfiguration<Prospect>
 {
-	public void Configure(EntityTypeBuilder<Prospect> entity)
+	public void Configure(EntityTypeBuilder<Prospect> builder)
 	{
-		entity.ToTable(nameof(Prospect));
+		builder.HasKey(p => p.Id);
 
-		entity.HasKey(p => p.Id);
+		builder.Property(p => p.Name)
+			.IsRequired()
+			.HasMaxLength(100);
 
-		entity.Property(e => e.Address)
-			.HasMaxLength(100)
-			.IsUnicode(false);
+		builder.Property(p => p.LastName)
+			.IsRequired()
+			.HasMaxLength(100);
 
-		entity.Property(e => e.Email)
-			.HasMaxLength(100)
-			.IsUnicode(false);
+		builder.Property(p => p.MarriedLastName)
+			.HasMaxLength(100);
 
-		entity.Property(e => e.EmailDesc)
-			.HasMaxLength(50)
-			.IsUnicode(false);
+		builder.Property(p => p.Address)
+			.IsRequired()
+			.HasMaxLength(250);
 
-		entity.Property(e => e.IdentificationValue)
-			.HasMaxLength(50)
-			.IsUnicode(false);
+		builder.Property(p => p.GenderId)
+			.IsRequired();
 
-		entity.Property(e => e.LastName)
-			.HasMaxLength(100)
-			.IsUnicode(false);
+		builder.Property(p => p.CountryId)
+			.IsRequired();
 
-		entity.Property(e => e.MarriedLastName)
-			.HasMaxLength(100)
-			.IsUnicode(false);
+		builder.Property(p => p.IdentificationTypeId)
+			.IsRequired();
 
-		entity.Property(e => e.Name)
-			.HasMaxLength(100)
-			.IsUnicode(false);
+		builder.Property(p => p.NeighborhoodId)
+			.IsRequired(false);
 
-		entity.Property(e => e.PhoneNumber)
-			.HasMaxLength(8)
-			.IsUnicode(false);
+		builder.Property(p => p.IdentificationValue)
+			.IsRequired()
+			.HasMaxLength(50);
 
-		entity.Property(e => e.PhoneNumberDesc)
-			.HasMaxLength(50)
-			.IsUnicode(false);
+		builder.Property(p => p.PhoneNumber)
+			.IsRequired()
+			.HasMaxLength(15);
+
+		builder.Property(p => p.PhoneNumberDesc)
+			.IsRequired()
+			.HasMaxLength(250);
+
+		builder.Property(p => p.Email)
+			.IsRequired()
+			.HasMaxLength(150);
+
+		builder.Property(p => p.EmailDesc)
+			.IsRequired()
+			.HasMaxLength(250);
+
+		// Relationships
+		builder.HasOne(p => p.Gender)
+			.WithMany()
+			.HasForeignKey(p => p.GenderId)
+			.OnDelete(DeleteBehavior.Restrict);
+
+		builder.HasOne(p => p.Country)
+			.WithMany()
+			.HasForeignKey(p => p.CountryId)
+			.OnDelete(DeleteBehavior.Restrict);
+
+		builder.HasOne(p => p.IdentificationType)
+			.WithMany()
+			.HasForeignKey(p => p.IdentificationTypeId)
+			.OnDelete(DeleteBehavior.Restrict);
+
+		builder.HasOne(p => p.Neighborhood)
+			.WithMany()
+			.HasForeignKey(p => p.NeighborhoodId)
+			.OnDelete(DeleteBehavior.SetNull);
 	}
 }
