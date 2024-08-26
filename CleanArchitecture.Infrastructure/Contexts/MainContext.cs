@@ -31,6 +31,18 @@ public partial class MainContext : DbContext
 
 	public virtual DbSet<Reference> References { get; set; }
 
+	public virtual DbSet<City> Cities { get; set; }
+
+	public virtual DbSet<Country> Countries { get; set; }
+
+	public virtual DbSet<Department> Departments { get; set; }
+
+	public virtual DbSet<Region> Regions { get; set; }
+
+	public virtual DbSet<Neighborhood> Neighborhoods { get; set; }
+
+	public virtual DbSet<User> Users { get; set; }
+
 	/// <inheritdoc />
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => base.OnConfiguring(optionsBuilder);
 
