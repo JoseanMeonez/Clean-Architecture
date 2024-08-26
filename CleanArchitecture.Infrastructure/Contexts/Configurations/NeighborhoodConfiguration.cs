@@ -8,6 +8,8 @@ internal sealed class NeighborhoodConfiguration : IEntityTypeConfiguration<Neigh
 {
 	public void Configure(EntityTypeBuilder<Neighborhood> builder)
 	{
+		builder.ToTable(nameof(Neighborhood));
+
 		builder.HasKey(n => n.Id);
 
 		builder.Property(n => n.Name)

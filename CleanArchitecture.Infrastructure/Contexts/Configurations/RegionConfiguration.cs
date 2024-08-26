@@ -8,6 +8,8 @@ internal sealed class RegionConfiguration : IEntityTypeConfiguration<Region>
 {
 	public void Configure(EntityTypeBuilder<Region> builder)
 	{
+		builder.ToTable(nameof(Region));
+
 		builder.HasKey(r => r.Id);
 
 		builder.Property(r => r.Name)

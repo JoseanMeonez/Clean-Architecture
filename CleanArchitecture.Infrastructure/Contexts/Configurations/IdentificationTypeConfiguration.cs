@@ -8,6 +8,8 @@ internal sealed class IdentificationTypeConfiguration : IEntityTypeConfiguration
 {
 	public void Configure(EntityTypeBuilder<IdentificationType> builder)
 	{
+		builder.ToTable(nameof(IdentificationType));
+
 		builder.HasKey(it => it.Id);
 
 		builder.Property(it => it.Name)

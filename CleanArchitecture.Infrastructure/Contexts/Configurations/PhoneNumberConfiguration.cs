@@ -8,6 +8,8 @@ internal sealed class PhoneNumberConfiguration : IEntityTypeConfiguration<PhoneN
 {
 	public void Configure(EntityTypeBuilder<PhoneNumber> builder)
 	{
+		builder.ToTable(nameof(PhoneNumber));
+
 		builder.HasKey(pn => pn.Id);
 
 		builder.Property(pn => pn.Description)

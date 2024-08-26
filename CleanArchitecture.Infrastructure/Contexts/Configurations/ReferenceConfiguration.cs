@@ -8,6 +8,8 @@ internal sealed class ReferenceConfiguration : IEntityTypeConfiguration<Referenc
 {
 	public void Configure(EntityTypeBuilder<Reference> builder)
 	{
+		builder.ToTable(nameof(Reference));
+
 		builder.HasKey(r => r.Id);
 
 		builder.Property(r => r.Name)

@@ -8,6 +8,8 @@ internal sealed class GenderConfiguration : IEntityTypeConfiguration<Gender>
 {
 	public void Configure(EntityTypeBuilder<Gender> builder)
 	{
+		builder.ToTable(nameof(Gender));
+
 		builder.HasKey(g => g.Id);
 
 		builder.Property(g => g.Name)

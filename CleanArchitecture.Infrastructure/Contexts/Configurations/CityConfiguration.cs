@@ -8,6 +8,8 @@ internal sealed class CityConfiguration : IEntityTypeConfiguration<City>
 {
 	public void Configure(EntityTypeBuilder<City> builder)
 	{
+		builder.ToTable(nameof(City));
+
 		builder.HasKey(ci => ci.Id);
 
 		builder.Property(ci => ci.Name)
