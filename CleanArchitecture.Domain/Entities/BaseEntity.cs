@@ -12,17 +12,23 @@ public abstract class BaseEntity<TId>
 
 	public Guid? CreatedById { get; init; }
 
+	public User? CreatedByUser { get; init; }
+
 	public required DateTime CreationDate { get; init; }
 
 	public string? UpdatedBy { get; set; }
 
 	public Guid? UpdatedById { get; set; }
 
+	public User? UpdatedByUser { get; set; }
+
 	public DateTime? UpdateDate { get; set; }
 
-	public string? DeletedBy { get; }
+	public string? DeletedBy { get; set; }
 
-	public Guid? DeletedById { get; }
+	public Guid? DeletedById { get; set; }
 
-	public DateTime? DeletedDate { get; }
+	public User? DeletedByUser { get; set; }
+
+	public DateTime? DeletedDate { get; set; }
 }
