@@ -14,7 +14,5 @@ public partial class User : BaseEntity<Guid>
 
 	public required byte[] PasswordSalt { get; set; }
 
-	public required bool IsActive { get; set; }
-
 	public virtual Gender? Gender { get; set; }
 }
