@@ -6,5 +6,11 @@ public partial class City : BaseEntity<int>
 
 	public int? DepartmentId { get; set; }
 
-	public Department? Department { get; set; }
+	public virtual Department? Department { get; set; }
+
+	public int? RegionId { get; set; }
+
+	public virtual Region? Region { get; set; }
+
+	public virtual ICollection<Neighborhood> Neighborhoods { get; set; } = [];
 }
