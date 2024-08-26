@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Features.CustomerFeature.Queries.GetById;
 
-public sealed record GetCustomerByIdQuery(int Id) : IRequest<Response<BasicCustomerResponse>>;
+public sealed record GetCustomerByIdQuery(Guid Id) : IRequest<Response<BasicCustomerResponse>>;
 
 internal sealed class GetCustomerByIdHandler(
 	ICustomerRepository customerRepository,

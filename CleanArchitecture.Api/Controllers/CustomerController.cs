@@ -14,7 +14,7 @@ public class CustomerController : ControllerBase
 
 	// GET api/<CustomerController>/5
 	[HttpGet("{id:int}")]
-	public async Task<IActionResult> Get(int id) =>
+	public async Task<IActionResult> Get(Guid id) =>
 		Ok(await Mediator.Send(new GetCustomerByIdQuery(id)));
 
 	// POST api/<CustomerController>

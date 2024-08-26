@@ -7,7 +7,7 @@ public class GetCustomerByIdQueryValidator : AbstractValidator<GetCustomerByIdQu
 	public GetCustomerByIdQueryValidator()
 	{
 		RuleFor(c => c.Id)
-			.GreaterThan(0).WithMessage("{PropertyName} es inválido.")
+			.NotNull().WithMessage("{PropertyName} es inválido.")
 			.WithName("El ID del cliente");
 	}
 }

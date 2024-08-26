@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class CustomerRepository(MainContext context) : GenericRepository<Customer, int>(context), ICustomerRepository
+public class CustomerRepository(MainContext context) : GenericRepository<Customer, Guid>(context), ICustomerRepository
 {
-	public Task<Customer?> GetByIdWithIncludes(int customerId)
+	public Task<Customer?> GetByIdWithIncludes(Guid customerId)
 	{
 		return GetEntityQuery()
 			.Include(c => c.Emails)
