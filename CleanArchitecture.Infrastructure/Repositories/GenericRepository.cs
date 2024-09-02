@@ -100,7 +100,6 @@ public class GenericRepository<T, TId> : IGenericRepository<T, TId>
 	/// <inheritdoc />
 	public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
 	{
-		int result = await _context.SaveChangesAsync(cancellationToken);
-		return result;
+		return await _context.SaveChangesAsync(cancellationToken);
 	}
 }
