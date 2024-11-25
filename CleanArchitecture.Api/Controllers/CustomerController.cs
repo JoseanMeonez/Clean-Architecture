@@ -1,4 +1,4 @@
-﻿using Application.Features.CustomerFeature.Queries.GetById;
+﻿using Application.Features.Customer.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -21,17 +21,20 @@ public class CustomerController : ControllerBase
 	[HttpPost]
 	public void Post([FromBody] string value)
 	{
+		throw new NotImplementedException();
 	}
 
 	// PUT api/<CustomerController>/5
 	[HttpPut("{id:int}")]
 	public void Put(int id, [FromBody] string value)
 	{
+		throw new NotImplementedException();
 	}
 
 	// DELETE api/<CustomerController>/5
 	[HttpDelete("{id}")]
 	public void Delete(int id)
 	{
+		throw new NotImplementedException();
 	}
 }
