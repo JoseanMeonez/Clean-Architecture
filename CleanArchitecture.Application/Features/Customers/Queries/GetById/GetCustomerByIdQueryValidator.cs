@@ -1,6 +1,7 @@
-﻿using FluentValidation;
+﻿using Application.Features.Customers.Requests;
+using FluentValidation;
 
-namespace Application.Features.CustomerFeature.Queries.GetById;
+namespace Application.Features.Customers.Queries.GetById;
 
 public class GetCustomerByIdQueryValidator : AbstractValidator<GetCustomerByIdQuery>
 {

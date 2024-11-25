@@ -1,4 +1,4 @@
-﻿namespace Application.Features.CustomerFeature.Responses;
+﻿namespace Application.Features.Customers.Responses;
 
 internal record BasicCustomerResponse(
 	int Id,

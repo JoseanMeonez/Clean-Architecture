@@ -1,6 +1,7 @@
-﻿using FluentValidation;
+﻿using Application.Features.Customers.Requests;
+using FluentValidation;
 
-namespace Application.Features.CustomerFeature.Queries.GetAll;
+namespace Application.Features.Customers.Queries.GetAll;
 
 public sealed class GetAllCustomersQueryValidator : AbstractValidator<GetAllCustomersQuery>
 {

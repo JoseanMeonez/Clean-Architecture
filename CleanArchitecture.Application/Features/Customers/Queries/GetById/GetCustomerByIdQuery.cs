@@ -1,18 +1,16 @@
-﻿using Application.Features.CustomerFeature.Responses;
+﻿using Application.Features.Customers.Requests;
+using Application.Features.Customers.Responses;
 using Application.Wrappers;
 using Domain.Entities;
 using Infrastructure.Interfaces;
 using MapsterMapper;
 using MediatR;
 
-namespace Application.Features.CustomerFeature.Queries.GetById;
-
-public sealed record GetCustomerByIdQuery(Guid Id) : IRequest<Response<BasicCustomerResponse>>;
+namespace Application.Features.Customers.Queries.GetById;
 
 internal sealed class GetCustomerByIdHandler(
 	ICustomerRepository customerRepository,
-	IMapper mapper)
-	: IRequestHandler<GetCustomerByIdQuery, Response<BasicCustomerResponse>>
+	IMapper mapper) : IRequestHandler<GetCustomerByIdQuery, Response<BasicCustomerResponse>>
 {
 	public async Task<Response<BasicCustomerResponse>> Handle(
 		GetCustomerByIdQuery request,
