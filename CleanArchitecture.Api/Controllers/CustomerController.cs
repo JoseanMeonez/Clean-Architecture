@@ -1,4 +1,4 @@
-﻿using Application.Features.Customer.Requests;
+﻿using Application.Features.Customers.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -9,13 +9,11 @@ public class CustomerController : ControllerBase
 {
 	// GET: api/<CustomerController>
 	[HttpGet]
-	public IEnumerable<string> Get() =>
-		new string[] { "value1", "value2" };
+	public async Task<IActionResult> GetAll(GetAllCustomersRequest request) => Ok(await Mediator.Send(request));
 
 	// GET api/<CustomerController>/5
 	[HttpGet("{id:int}")]
-	public async Task<IActionResult> Get(Guid id) =>
-		Ok(await Mediator.Send(new GetCustomerByIdQuery(id)));
+	public async Task<IActionResult> Get(Guid id) => Ok(await Mediator.Send(new GetCustomerByIdRequest(id)));
 
 	// POST api/<CustomerController>
 	[HttpPost]
