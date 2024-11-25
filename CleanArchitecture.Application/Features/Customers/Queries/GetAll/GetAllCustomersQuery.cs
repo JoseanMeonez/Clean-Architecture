@@ -6,9 +6,9 @@ using MediatR;
 namespace Application.Features.Customers.Queries.GetAll;
 
 internal sealed class GetAllCustomersQueryHandler : IRequestHandler<
-	GetAllCustomersQuery,
+	GetAllCustomersRequest,
 	Response<BasicCustomerResponse>>
 {
-	public Task<Response<BasicCustomerResponse>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
+	public Task<Response<BasicCustomerResponse>> Handle(GetAllCustomersRequest request, CancellationToken cancellationToken)
 		=> throw new NotImplementedException();
 }

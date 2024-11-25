@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Application.Features.Customers.Requests;
 
-public sealed record GetCustomerByIdQuery(Guid Id) : IRequest<Response<BasicCustomerResponse>>;
+public sealed record GetCustomerByIdRequest(Guid Id) : IRequest<Response<BasicCustomerResponse>>;

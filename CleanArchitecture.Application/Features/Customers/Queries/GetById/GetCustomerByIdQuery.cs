@@ -10,10 +10,10 @@ namespace Application.Features.Customers.Queries.GetById;
 
 internal sealed class GetCustomerByIdHandler(
 	ICustomerRepository customerRepository,
-	IMapper mapper) : IRequestHandler<GetCustomerByIdQuery, Response<BasicCustomerResponse>>
+	IMapper mapper) : IRequestHandler<GetCustomerByIdRequest, Response<BasicCustomerResponse>>
 {
 	public async Task<Response<BasicCustomerResponse>> Handle(
-		GetCustomerByIdQuery request,
+		GetCustomerByIdRequest request,
 		CancellationToken cancellationToken)
 	{
 		Customer customer = await customerRepository.GetByIdWithIncludes(request.Id)

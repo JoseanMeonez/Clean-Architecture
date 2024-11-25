@@ -1,9 +1,11 @@
 ﻿namespace Application.Parameters;
 
-public record PaginatedRequestParameters(
-	string? SearchParameter,
-	string? SortColumn,
-	string? SortOrder,
-	bool All,
-	int Page = 1,
-	int PageSize = 10);
+public record PaginatedRequestParameters()
+{
+	public string? SearchParameter { get; set; }
+	public string? SortColumn { get; set; }
+	public string? SortOrder { get; set; }
+	public bool All { get; set; }
+	public int Page { get; set; }
+	public int PageSize { get; set; }
+}
