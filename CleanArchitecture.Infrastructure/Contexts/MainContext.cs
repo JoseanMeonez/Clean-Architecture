@@ -17,31 +17,31 @@ public partial class MainContext : DbContext
 		ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 	}
 
-	public virtual DbSet<Customer> Customers { get; set; }
+	public required virtual DbSet<Customer> Customers { get; set; }
 
-	public virtual DbSet<Email> Emails { get; set; }
+	public required virtual DbSet<Email> Emails { get; set; }
 
-	public virtual DbSet<Gender> Genders { get; set; }
+	public required virtual DbSet<Gender> Genders { get; set; }
 
-	public virtual DbSet<IdentificationType> IdentificationTypes { get; set; }
+	public required virtual DbSet<IdentificationType> IdentificationTypes { get; set; }
 
-	public virtual DbSet<PhoneNumber> PhoneNumbers { get; set; }
+	public required virtual DbSet<PhoneNumber> PhoneNumbers { get; set; }
 
-	public virtual DbSet<Prospect> Prospects { get; set; }
+	public required virtual DbSet<Prospect> Prospects { get; set; }
 
-	public virtual DbSet<Reference> References { get; set; }
+	public required virtual DbSet<Reference> References { get; set; }
 
-	public virtual DbSet<City> Cities { get; set; }
+	public required virtual DbSet<City> Cities { get; set; }
 
-	public virtual DbSet<Country> Countries { get; set; }
+	public required virtual DbSet<Country> Countries { get; set; }
 
-	public virtual DbSet<Department> Departments { get; set; }
+	public required virtual DbSet<Department> Departments { get; set; }
 
-	public virtual DbSet<Region> Regions { get; set; }
+	public required virtual DbSet<Region> Regions { get; set; }
 
-	public virtual DbSet<Neighborhood> Neighborhoods { get; set; }
+	public required virtual DbSet<Neighborhood> Neighborhoods { get; set; }
 
-	public virtual DbSet<User> Users { get; set; }
+	public required virtual DbSet<User> Users { get; set; }
 
 	/// <inheritdoc />
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => base.OnConfiguring(optionsBuilder);
