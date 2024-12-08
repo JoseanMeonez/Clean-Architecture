@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Application.Features.Customers.Queries.GetById;
 
-public class GetCustomerByIdQueryValidator : AbstractValidator<GetCustomerByIdRequest>
+internal sealed class GetCustomerByIdQueryValidator : AbstractValidator<GetCustomerByIdRequest>
 {
 	public GetCustomerByIdQueryValidator()
 	{

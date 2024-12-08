@@ -43,7 +43,7 @@ public static class DependencyInjection
 		// Adding dependencies
 		services.AddMapster();
 		services.AddMediatR(m => m.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
 		services.AddTransient(
 			typeof(IPipelineBehavior<,>),
 			typeof(ValidationBehavior<,>));
