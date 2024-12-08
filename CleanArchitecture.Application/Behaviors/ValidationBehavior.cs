@@ -22,7 +22,7 @@ public class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TReq
 
 			IEnumerable<ValidationFailure> failures = validationResults.SelectMany(r => r.Errors).Where(f => f != null);
 
-			if (failures.Count() is not 0)
+			if (failures.Any())
 			{
 				throw new Exceptions.ValidationException(failures);
 			}
