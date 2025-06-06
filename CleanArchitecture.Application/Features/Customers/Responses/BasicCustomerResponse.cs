@@ -1,6 +1,6 @@
 ﻿namespace Application.Features.Customers.Responses;
 
-internal record BasicCustomerResponse(
+public sealed record BasicCustomerResponse(
 	int Id,
 	string Name,
 	string LastName,
