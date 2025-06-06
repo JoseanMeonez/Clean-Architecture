@@ -1,7 +1,7 @@
 ﻿using Application.Features.Customers.Responses;
+using Application.Mediator;
 using Application.Parameters;
 using Application.Wrappers;
-using MediatR;
 
 namespace Application.Features.Customers.Requests;
 

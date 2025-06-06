@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿using Application.Mediator;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
