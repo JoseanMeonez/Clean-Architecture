@@ -29,11 +29,11 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
 		builder.Property(u => u.PasswordHash)
 			.IsRequired()
-			.HasColumnType("varbinary(max)");
+			.HasColumnType("bytea");
 
 		builder.Property(u => u.PasswordSalt)
 			.IsRequired()
-			.HasColumnType("varbinary(max)");
+			.HasColumnType("bytea");
 
 		// Relationships
 		builder.HasOne(u => u.Gender)

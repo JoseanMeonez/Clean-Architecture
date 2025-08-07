@@ -22,7 +22,7 @@ builder.Services
 	})
 	.AddDbContext<MainContext>(options =>
 	{
-		options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseContext"));
+		options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseContext"));
 	});
 
 WebApplication app = builder.Build();
