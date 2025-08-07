@@ -8,7 +8,7 @@ public partial class Reference : BaseEntity<int>
 
 	public required string Relationship { get; set; }
 
-	public required int CustomerId { get; set; }
+	public required Guid CustomerId { get; set; }
 
 	public virtual Customer? Customer { get; set; }
 }
