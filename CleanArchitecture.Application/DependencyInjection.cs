@@ -1,11 +1,11 @@
 ﻿using Application.Behaviors;
+using Application.Mediator;
 using Application.Settings;
 using Application.Wrappers;
 using FluentValidation;
 using Infrastructure.Interfaces;
 using Infrastructure.Repositories;
 using Mapster;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -42,11 +42,26 @@ public static class DependencyInjection
 	{
 		// Adding dependencies
 		services.AddMapster();
-		services.AddMediatR(m => m.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+
+		// Register custom mediator and handlers
+		services.AddSingleton<IMediator, Mediator.Mediator>();
+
+		// Register all IRequestHandler implementations
+		Type handlerInterface = typeof(IRequestHandler<,>);
+		foreach (Type type in Assembly.GetExecutingAssembly().GetTypes())
+		{
+			IEnumerable<Type> interfaces = type
+				.GetInterfaces()
+				.Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerInterface);
+
+			foreach (Type @interface in interfaces)
+			{
+				services.AddTransient(@interface, type);
+			}
+		}
+
 		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
-		services.AddTransient(
-			typeof(IPipelineBehavior<,>),
-			typeof(ValidationBehavior<,>));
+		services.AddTransient(typeof(ValidationBehavior<,>));
 
 		// Configurations
 		services.Configure<JWTSettings>(configuration.GetSection("JWTSettings"));

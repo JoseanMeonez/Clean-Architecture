@@ -1,19 +1,22 @@
 ﻿using Application.Features.Customers.Requests;
+using Application.Mediator;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CustomerController : ControllerBase
+public class CustomerController(IMediator mediator) : ControllerBase
 {
 	// GET: api/<CustomerController>
 	[HttpGet]
-	public async Task<IActionResult> GetAll(GetAllCustomersRequest request) => Ok(await Mediator.Send(request));
+	public async Task<IActionResult> GetAll([FromQuery] GetAllCustomersRequest request)
+		=> Ok(await mediator.Send(request));
 
 	// GET api/<CustomerController>/5
 	[HttpGet("{id:guid}")]
-	public async Task<IActionResult> Get(Guid id) => Ok(await Mediator.Send(new GetCustomerByIdRequest(id)));
+	public async Task<IActionResult> Get(Guid id)
+		=> Ok(await mediator.Send(new GetCustomerByIdRequest(id)));
 
 	// POST api/<CustomerController>
 	[HttpPost]

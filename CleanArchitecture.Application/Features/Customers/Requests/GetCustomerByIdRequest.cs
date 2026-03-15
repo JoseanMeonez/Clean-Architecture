@@ -1,6 +1,6 @@
 ﻿using Application.Features.Customers.Responses;
+using Application.Mediator;
 using Application.Wrappers;
-using MediatR;
 
 namespace Application.Features.Customers.Requests;
 
